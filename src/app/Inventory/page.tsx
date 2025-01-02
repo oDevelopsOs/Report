@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLanding } from "../store/landing";
 import { useInventory } from "../store/Inventory";
 import Link from "next/link";
@@ -21,6 +21,32 @@ export default function ShipmentsIncOut() {
   const text = useInventory((state) => state.text6);
   const setText = useInventory((state) => state.setName6);
   const setBool = useInventory((state) => state.setBool6);
+
+  const [selected, setSelected] = useState<string | null>(null); // Estado para saber cuál botón está activo
+  
+
+
+  useEffect(() => {
+    const button = document.getElementById('stateButton');
+  
+    if (button) {
+      button.addEventListener('click', () => {
+        if (button.dataset.state === 'inactive') {
+          button.dataset.state = 'active';
+          button.className = 'border-2 border-black h-12 w-40 rounded-xl text-lg  hover:shadow-lg hover:shadow-gray-400 active:border-2 bg-black text-white';
+        } else {
+          button.dataset.state = 'inactive';
+          button.className = 'border-2 border-black h-12 w-40 rounded-xl text-lg active:bg-black active:text-white hover:shadow-lg hover:shadow-gray-400 active:border-white active:border-2 bg-white text-black';
+        }
+      });
+    }
+  
+    return () => {
+      if (button) {
+        button.removeEventListener('click', () => {});
+      }
+    };
+  }, []);
 
   return (
     <section className="w-full h-screen my-auto flex flex-row">
@@ -129,15 +155,36 @@ export default function ShipmentsIncOut() {
             Had the time to work on inventory ?
             </p>
             <div className="gap-4 flex flex-row w-full">
+              {/* Botón "Yes" */}
               <button
-                className="border-2 border-black h-12 w-40 rounded-xl text-lg bg-black text-white active:bg-white active:text-black hover:shadow-lg hover:shadow-gray-400 active:border-black active:border-2"
-                onClick={() => setBool("Yes")}
+                className={`border-2 h-12 w-40 rounded-xl text-lg transition-all 
+          ${
+            selected === "Yes"
+              ? "bg-black text-white border-black"
+              : "bg-white text-black border-black hover:shadow-lg hover:shadow-gray-400"
+          }
+        `}
+                onClick={() => {
+                  setSelected("Yes");
+                  setBool("Yes");
+                }}
               >
                 Yes
               </button>
+
+              {/* Botón "No" */}
               <button
-                className="border-2 border-black h-12 w-40 rounded-xl text-lg active:bg-black active:text-white hover:shadow-lg hover:shadow-gray-400 active:border-white active:border-2"
-                onClick={() => setBool("No")}
+                className={`border-2 h-12 w-40 rounded-xl text-lg transition-all 
+          ${
+            selected === "No"
+              ? "bg-black text-white border-black"
+              : "bg-white text-black border-black hover:shadow-lg hover:shadow-gray-400"
+          }
+        `}
+                onClick={() => {
+                  setSelected("No");
+                  setBool("No");
+                }}
               >
                 No
               </button>
