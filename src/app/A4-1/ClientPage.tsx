@@ -90,7 +90,7 @@ export default function ClientPage({ serverDate }: ClientPageProps) {
   
         // aslm.be.bru-stores@aslmx.com
         // Llamar a la función sendEmail con el File convertido
-        sendEmailWithAttachment('Report of the day', `By ${name}`, 'aslm.be.bru-stores@aslmx.com', pdfFile);
+        sendEmailWithAttachment('Report of the day', `Report made by ${name}`, 'aslm.be.bru-stores@aslmx.com', pdfFile);
       });
       
       setText('');
