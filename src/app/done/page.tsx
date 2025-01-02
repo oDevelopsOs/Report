@@ -13,7 +13,7 @@ export default function Page() {
         setTimeout(() => {
          window.location.href = '/';
          setName('')
-        }, 6000);
+        }, 3000);
       }
       useEffect(() => {
         redirect();
