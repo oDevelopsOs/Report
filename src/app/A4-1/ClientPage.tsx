@@ -92,17 +92,21 @@ export default function ClientPage({ serverDate }: ClientPageProps) {
         // Llamar a la función sendEmail con el File convertido
         sendEmailWithAttachment('Report of the day', `Report made by ${name}`, 'aslm.be.bru-stores@aslmx.com', pdfFile);
       });
-      
-      setText('');
-      setText1('');
-      setText2('');
-      setText3('');
-      setText4('');
-      setText5('');
-      setText6('');
-      setText7('');
-      setText8('');
-      
+
+      function delay(){
+        setTimeout(() => {
+            setText('');
+          setText1('');
+          setText2('');
+          setText3('');
+          setText4('');
+          setText5('');
+          setText6('');
+          setText7('');
+          setText8('');
+      },1000)      
+    }
+    delay()
   };
   
   
